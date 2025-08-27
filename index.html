@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Singleness & Sexual Longing - Depths to Heights</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #5e3a71;
+            --secondary: #7d5ba6;
+            --accent: #c39bd3;
+            --hope: #89cff0;
+            --peace: #98d8c8;
+            --wisdom: #f7dc6f;
+            --courage: #ff9a76;
+            --light: #fef9e7;
+            --dark: #2c1e3a;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #2c1e3a 0%, #5e3a71 50%, #7d5ba6 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .container {
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            min-height: calc(100vh - 80px);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .header-title h1 {
+            font-size: 1.5em;
+            font-weight: normal;
+            margin-bottom: 2px;
+        }
+
+        .header-subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .audio-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .audio-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: normal;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .card h3 {
+            color: var(--secondary);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        /* Scripture Card */
+        .scripture-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .scripture-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .scripture-ref {
+            text-align: right;
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        /* Welcome Section */
+        .welcome-hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .welcome-hero h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .welcome-hero p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .dashboard-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-title {
+            font-size: 1.2em;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .dashboard-desc {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Testimony Card */
+        .testimony-card {
+            background: linear-gradient(135deg, var(--hope) 0%, var(--peace) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .testimony-author {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .testimony-text {
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* Resource Item */
+        .resource-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .resource-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .resource-content {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* Holy Rhythm Card */
+        .rhythm-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--wisdom);
+        }
+
+        .rhythm-time {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .rhythm-activity {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+        }
+
+        .btn-hope {
+            background: var(--hope);
+        }
+
+        .btn-peace {
+            background: var(--peace);
+        }
+
+        .btn-wisdom {
+            background: var(--wisdom);
+        }
+
+        .btn-courage {
+            background: var(--courage);
+        }
+
+        /* Journal Textarea */
+        .journal-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1em;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .journal-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Progress Tracker */
+        .progress-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--hope), var(--peace));
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Check-in Options */
+        .checkin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .checkin-option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkin-option:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .checkin-option.selected {
+            border-color: var(--accent);
+            background: var(--light);
+        }
+
+        .checkin-emoji {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            background: none;
+            border: none;
+            color: white;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            opacity: 1;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-item.active {
+            color: var(--light);
+        }
+
+        .nav-icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .nav-text {
+            font-size: 0.75em;
+        }
+
+        /* Message Display */
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-success {
+            background: rgba(152, 216, 200, 0.2);
+            border: 2px solid var(--peace);
+            color: var(--peace);
+        }
+
+        .message-info {
+            background: rgba(137, 207, 240, 0.2);
+            border: 2px solid var(--hope);
+            color: var(--hope);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-title h1 {
+                font-size: 1.2em;
+            }
+            
+            .checkin-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Audio Element -->
+        <audio id="bgMusic" loop>
+            <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA">
+        </audio>
+
+        <!-- HOME SCREEN -->
+        <div id="homeScreen" class="screen active">
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <div class="header-title">
+                            <h1>Singleness & Sexual Longing</h1>
+                            <div class="header-subtitle">Embracing wholeness in your season</div>
+                        </div>
+                    </div>
+                    <button class="audio-toggle" onclick="app.toggleAudio()">🔇</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="welcome-hero">
+                    <h2>You Are Whole, Not Half</h2>
+                    <p>
+                        Your singleness is not a waiting room for "real life" to begin. 
+                        You are not incomplete. You are not less than. 
+                        Your desires are not shameful. Your loneliness is not weakness. 
+                        You are a whole person, deeply loved by God, right now, exactly as you are.
+                    </p>
+                </div>
+
+                <div class="scripture-card">
+                    <div class="scripture-text">
+                        "I have learned the secret of being content in any and every situation... I can do all this through him who gives me strength."
+                    </div>
+                    <div class="scripture-ref">Philippians 4:12-13</div>
+                </div>
+
+                <div class="card">
+                    <h2>Your Daily Journey</h2>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card" onclick="app.showScreen('dailyEncouragement')">
+                            <div class="dashboard-icon">🌅</div>
+                            <div class="dashboard-title">Daily Encouragement</div>
+                            <div class="dashboard-desc">Start your day with truth and hope</div>
+                        </div>
+                        
+                        <div class="dashboard-card" onclick="app.showScreen('honestDevotionals')">
+                            <div class="dashboard-icon">📖</div>
+                            <div class="dashboard-title">Honest Devotionals</div>
+                            <div class="dashboard-desc">Real talk about desire and holiness</div>
+                        </div>
+                        
+                        <div class="dashboard-card" onclick="app.showScreen('communityStories')">
+                            <div class="dashboard-icon">👥</div>
+                            <div class="dashboard-title">Community Stories</div>
+                            <div class="dashboard-desc">Thriving singles share their journey</div>
+                        </div>
+                        
+                        <div class="dashboard-card" onclick="app.showScreen('holyRhythms')">
+                            <div class="dashboard-icon">🎵</div>
+                            <div class="dashboard-title">Holy Rhythms</div>
+                            <div class="dashboard-desc">Practical patterns for flourishing</div>
+                        </div>
+                        
+                        <div class="dashboard-card" onclick="app.showScreen('sexualWholeness')">
+                            <div class="dashboard-icon">🔥</div>
+                            <div class="dashboard-title">Sexual Wholeness</div>
+                            <div class="dashboard-desc">Navigating desire with wisdom</div>
+                        </div>
+                        
+                        <div class="dashboard-card" onclick="app.showScreen('lonelinessSupport')">
+                            <div class="dashboard-icon">💝</div>
+                            <div class="dashboard-title">Loneliness & Connection</div>
+                            <div class="dashboard-desc">Building meaningful relationships</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Quick Check-In</h2>
+                    <p style="margin-bottom: 20px;">How's your heart today? (Be honest - God already knows)</p>
+                    <div class="checkin-grid">
+                        <div class="checkin-option" onclick="app.selectMood(this, 'content')">
+                            <div class="checkin-emoji">😊</div>
+                            <div>Content</div>
+                        </div>
+                        <div class="checkin-option" onclick="app.selectMood(this, 'lonely')">
+                            <div class="checkin-emoji">😔</div>
+                            <div>Lonely</div>
+                        </div>
+                        <div class="checkin-option" onclick="app.selectMood(this, 'struggling')">
+                            <div class="checkin-emoji">😣</div>
+                            <div>Struggling</div>
+                        </div>
+                        <div class="checkin-option" onclick="app.selectMood(this, 'hopeful')">
+                            <div class="checkin-emoji">🌟</div>
+                            <div>Hopeful</div>
+                        </div>
+                        <div class="checkin-option" onclick="app.selectMood(this, 'frustrated')">
+                            <div class="checkin-emoji">😤</div>
+                            <div>Frustrated</div>
+                        </div>
+                        <div class="checkin-option" onclick="app.selectMood(this, 'peaceful')">
+                            <div class="checkin-emoji">🕊️</div>
+                            <div>Peaceful</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" onclick="app.saveCheckIn()">Save Check-In</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAILY ENCOURAGEMENT SCREEN -->
+        <div id="dailyEncouragement" class="screen">
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <button class="back-btn" onclick="app.showScreen('homeScreen')">←</button>
+                        <div class="header-title">
+                            <h1>Daily Encouragement</h1>
+                            <div class="header-subtitle">Truth for your journey today</div>
+                        </div>
+                    </div>
+                    <button class="audio-toggle" onclick="app.toggleAudio()">🔇</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="scripture-card">
+                    <div class="scripture-text" id="dailyVerse">Loading today's verse...</div>
+                    <div class="scripture-ref" id="dailyRef"></div>
+                </div>
+
+                <div class="card">
+                    <h2 id="encouragementTitle">Today's Truth</h2>
+                    <div id="encouragementContent"></div>
+                </div>
+
+                <div class="card">
+                    <h2>Affirmations for Today</h2>
+                    <ul style="line-height: 2.2; font-size: 1.1em;">
+                        <li>I am complete in Christ, not waiting to be completed by another person</li>
+                        <li>My worth is not determined by my relationship status</li>
+                        <li>God sees my desires and honors my faithfulness</li>
+                        <li>I can experience deep intimacy with God and others without romance</li>
+                        <li>My singleness gives me unique opportunities to serve God</li>
+                        <li>Sexual desire is not sin; it's human. What I do with it matters</li>
+                        <li>I am not missing out; I am living fully in this season</li>
+                        <li>God's timing is perfect, even when I don't understand it</li>
+                        <li>I can thrive, not just survive, as a single person</li>
+                        <li>My life has purpose and meaning right now</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>Prayer for Today</h2>
+                    <div class="resource-item">
+                        <div class="resource-content">
+                            Lord, thank You for this day as a single person. Help me to see it not as a burden but as a gift. 
+                            Give me eyes to see the opportunities this season provides. 
+                            When loneliness comes, be my comfort. When desire overwhelms, be my strength. 
+                            When society makes me feel "less than," remind me of my worth in You. 
+                            Help me to live fully today, not waiting for tomorrow. 
+                            Show me how to love and be loved in meaningful ways. 
+                            Teach me the joy of undivided devotion to You. 
+                            In Jesus' name, Amen.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Today's Challenge</h2>
+                    <div class="resource-item">
+                        <div class="resource-title">Embrace One Thing</div>
+                        <div class="resource-content">
+                            Today, do one thing you can only do because you're single. 
+                            Take a spontaneous trip, serve someone freely, pursue a passion project, 
+                            spend extended time with God, or bless someone with your undivided attention. 
+                            Celebrate the freedom and flexibility your singleness provides.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HONEST DEVOTIONALS SCREEN -->
+        <div id="honestDevotionals" class="screen">
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <button class="back-btn" onclick="app.showScreen('homeScreen')">←</button>
+                        <div class="header-title">
+                            <h1>Honest Devotionals</h1>
+                            <div class="header-subtitle">Real talk about real struggles</div>
+                        </div>
+                    </div>
+                    <button class="audio-toggle" onclick="app.toggleAudio()">🔇</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="card">
+                    <h2>When Your Bed Feels Empty</h2>
+                    <p>
+                        Let's be honest: sometimes the loneliness is physical. You don't just want someone to talk to; 
+                        you want someone to hold you. You want skin-to-skin connection, the warmth of another body, 
+                        the intimacy of being known physically.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        This isn't shameful. God created you as an embodied being. Jesus himself sought physical comfort—
+                        he asked his disciples to stay awake with him in Gethsemane. He let John lean against his chest. 
+                        He wept and needed comfort.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <strong>What to do:</strong> Don't spiritualize away your physical needs. Get massages. Hug friends longer. 
+                        Hold babies. Get a pet. Exercise. Dance. Your body needs touch and movement. 
+                        Honor that need in holy ways.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2>When Sexual Desire Feels Overwhelming</h2>
+                    <p>
+                        Some days, your sexuality feels like a tidal wave threatening to sweep you away. 
+                        You wonder why God gave you such strong desires with no "legitimate" outlet. 
+                        You're tired of being told to "take cold showers" or "think about something else."
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Here's the truth: Your sexual desire is not a mistake. It's not a punishment. It's not something to be ashamed of. 
+                        It's proof that you're alive, that you're human, that you were created for intimacy and connection.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Sexual energy is life energy. Channel it into creativity, service, physical activity, deep friendships. 
+                        Let it fuel your prayers—yes, even prayers about sex. God isn't shocked by your desires. 
+                        He created them. Talk to Him about them honestly.
+                    </p>
+                    <div class="scripture-card" style="margin-top: 20px;">
+                        <div class="scripture-text">
+                            "For we do not have a high priest who is unable to empathize with our weaknesses, 
+                            but we have one who has been tempted in every way, just as we are—yet he did not sin."
+                        </div>
+                        <div class="scripture-ref">Hebrews 4:15</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>When Everyone Else Is Getting Married</h2>
+                    <p>
+                        Another engagement announcement. Another wedding invitation. Another baby shower. 
+                        You smile, congratulate, celebrate—and then go home and cry. You wonder what's wrong with you. 
+                        Why hasn't it happened for you?
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Nothing is wrong with you. Your singleness is not a character flaw, a punishment, or a sign that you're unlovable. 
+                        Some of the most amazing, attractive, godly people are single. Jesus was single. Paul was single. 
+                        Singleness is not a consolation prize for those who couldn't "achieve" marriage.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Grieve if you need to. It's okay to mourn the life you thought you'd have by now. 
+                        But don't get stuck there. Your life is not on hold. You're not in the waiting room. 
+                        This is your real life, happening right now. Live it fully.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2>When The Church Makes You Feel "Less Than"</h2>
+                    <p>
+                        The church often doesn't know what to do with singles, especially older singles. 
+                        You're too old for the youth group, but don't fit in the "couples class." 
+                        Sermons assume everyone is married with 2.5 kids. You feel invisible, forgotten, 
+                        like you don't quite belong.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Your singleness is not a problem to be solved. You are not a project. You are not incomplete. 
+                        You are a full member of the body of Christ, with gifts to offer and a vital role to play. 
+                        The church needs your perspective, your availability, your unique contributions.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        If your church doesn't see your value, that's their loss, not your deficiency. 
+                        Find ways to serve that honor your singleness. Start a singles ministry if there isn't one. 
+                        Be the representation you wish you had seen.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2>When You're Tired of Being Strong</h2>
+                    <p>
+                        Sometimes you're exhausted from being independent, from handling everything alone, 
+                        from being your own support system. You want someone else to be strong for you, 
+                        to take care of you, to tell you it's going to be okay.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        It's okay to not be okay. It's okay to admit you're struggling. 
+                        Independence doesn't mean isolation. You need people. We all do. 
+                        Build your chosen family. Invest deeply in friendships. Ask for help. 
+                        Let people love you.
+                    </p>
+                    <div class="resource-item" style="margin-top: 20px;">
+                        <div class="resource-title">Remember:</div>
+                        <div class="resource-content">
+                            Even Jesus needed Simon to carry his cross. Strength isn't doing everything alone; 
+                            it's knowing when to lean on others and on God.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMUNITY STORIES SCREEN -->
+        <div id="communityStories" class="screen">
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <button class="back-btn" onclick="app.showScreen('homeScreen')">←</button>
+                        <div class="header-title">
+                            <h1>Community Stories</h1>
+                            <div class="header-subtitle">Singles thriving in their journey</div>
+                        </div>
+                    </div>
+                    <button class="audio-toggle" onclick="app.toggleAudio()">🔇</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="testimony-card">
+                    <div class="testimony-author">Sarah, 35, Missionary</div>
+                    <div class="testimony-text">
+                        "I spent my twenties waiting for marriage before 'real ministry' could begin. 
+                        At 30, God showed me my singleness wasn't a barrier—it was my superpower. 
+                        I've served in 12 countries, started 3 ministries, and have spiritual children all over the world. 
+                        Could I have done this married with kids? Maybe. But probably not with the same freedom and focus. 
+                        My singleness isn't a sacrifice; it's a strategic advantage for the Kingdom."
+                    </div>
+                </div>
+
+                <div class="testimony-card">
+                    <div class="testimony-author">Marcus, 42, Pastor</div>
+                    <div class="testimony-text">
+                        "Yes, I'm a single pastor. Yes, it's sometimes awkward. But Paul was single, and he planted churches across the known world. 
+                        My singleness allows me to be available at 2 AM when someone's in crisis. 
+                        I can take risks in ministry that my married colleagues can't. 
+                        I've learned that wholeness doesn't come from another person—it comes from Christ. 
+                        And from that wholeness, I can love my congregation fully."
+                    </div>
+                </div>
+
+                <div class="testimony-card">
+                    <div class="testimony-author">Jennifer, 28, Teacher</div>
+                    <div class="testimony-text">
+                        "I'm not going to lie—the sexual frustration is real. But I've learned that sexual energy is creative energy. 
+                        I channel it into my art, my work with kids, my friendships. 
+                        I'm intimate with people in non-sexual ways that many married people never experience. 
+                        I know myself better because I've had to face myself without the distraction of a relationship. 
+                        If marriage comes, great. But I'm not waiting to live."
+                    </div>
+                </div>
+
+                <div class="testimony-card">
+                    <div class="testimony-author">David, 38, Engineer</div>
+                    <div class="testimony-text">
+                        "I thought by now I'd be married with kids. Instead, I'm the best uncle, the most available friend, 
+                        the guy who can drop everything to help. I mentor teenage boys who have no fathers. 
+                        I travel and experience the world. I've built deep male friendships that many married men lose. 
+                        Am I lonely sometimes? Absolutely. But I'm also free, purposeful, and more myself than I've ever been."
+                    </div>
+                </div>
+
+                <div class="testimony-card">
+                    <div class="testimony-author">Rachel, 31, Counselor</div>
+                    <div class="testimony-text">
+                        "I help married couples for a living, and honestly? Singleness has its advantages. 
+                        I see how marriage doesn't solve loneliness, doesn't complete you, doesn't fix your issues. 
+                        I've had to do the hard work of becoming whole on my own. 
+                        If I marry, I'll bring a whole person to the relationship, not half a person looking to be completed."
+                    </div>
+                </div>
+
+                <div class="testimony-card">
+                    <div class="testimony-author">Tom, 45, Business Owner</div>
+                    <div class="testimony-text">
+                        "I used to hide my virginity like a shameful secret. Now I see it as a testament to my faithfulness. 
+                        In a culture that says sex is everything, I'm living proof that you can have a full, rich, meaningful life without it. 
+                        Has it been easy? No. Have there been close calls? Many. But every time I choose obedience, 
+                        I'm saying that God is better than any temporary pleasure."
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Your Story Matters</h2>
+                    <p>
+                        You're not alone in this journey. Thousands of singles are navigating the same challenges, 
+                        asking the same questions, fighting the same battles. Your story—with all its struggles and victories—
+                        could be the encouragement someone else needs to keep going.
+                    </p>
+                    <button class="btn btn-hope btn-full" onclick="app.shareStory()">Share Your Story</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HOLY RHYTHMS SCREEN -->
+        <div id="holyRhythms" class="screen">
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <button class="back-btn" onclick="app.showScreen('homeScreen')">←</button>
+                        <div class="header-title">
+                            <h1>Holy Rhythms</h1>
+                            <div class="header-subtitle">Practical patterns for thriving</div>
+                        </div>
+                    </div>
+                    <button class="audio-toggle" onclick="app.toggleAudio()">🔇</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="card">
+                    <h2>Daily Rhythms</h2>
+                    
+                    <div class="rhythm-card">
+                        <div class="rhythm-time">Morning: Grounding (15 mins)</div>
+                        <div class="rhythm-activity">
+                            Before checking your phone or comparing your life to others on social media, ground yourself in truth. 
+                            Read Scripture. Pray. Remind yourself who you are in Christ. Set your intention for the day.
+                        </div>
+                    </div>
+                    
+                    <div class="rhythm-card">
+                        <div class="rhythm-time">Midday: Connection (5 mins)</div>
+                        <div class="rhythm-activity">
+                            Reach out to someone. Send an encouraging text. Make a quick call. 
+                            Combat isolation by initiating connection. Don't wait for others to reach out first.
+                        </div>
+                    </div>
+                    
+                    <div class="rhythm-card">
+                        <div class="rhythm-time">Evening: Movement (30 mins)</div>
+                        <div class="rhythm-activity">
+                            Move your body. Exercise, dance, walk, swim. Physical movement helps process emotional and sexual energy. 
+                            It's a form of prayer, worship, and self-care.
+                        </div>
+                    </div>
+                    
+                    <div class="rhythm-card">
+                        <div class="rhythm-time">Night: Gratitude (10 mins)</div>
+                        <div class="rhythm-activity">
+                            Before bed, list three things you're grateful for from today. 
+                            Include at least one thing about your singleness. Train your brain to see gifts, not just gaps.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Weekly Rhythms</h2>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Sabbath Practice</div>
+                        <div class="resource-content">
+                            Take one day to rest, play, and delight. Do things that bring you joy, not productivity. 
+                            This is especially important for singles who often feel pressure to be constantly productive 
+                            to prove their worth.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Deep Connection</div>
+                        <div class="resource-content">
+                            Schedule at least one meaningful, in-person connection each week. 
+                            Coffee with a friend, dinner with family, serving alongside others. 
+                            Fight against the tendency to isolate.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Creative Expression</div>
+                        <div class="resource-content">
+                            Dedicate time to creating something. Art, music, writing, cooking, building. 
+                            Creation is a way to channel life energy and connect with the Creator.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Physical Care</div>
+                        <div class="resource-content">
+                            Do something to care for your body. Get a massage, take a long bath, 
+                            do yoga, get a haircut. Your body is a temple, even (especially) as a single person.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Monthly Rhythms</h2>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Adventure Day</div>
+                        <div class="resource-content">
+                            Once a month, do something adventurous. Travel somewhere new, try a new restaurant, 
+                            take a class, explore your city. Don't wait for someone else to have experiences with.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Service Project</div>
+                        <div class="resource-content">
+                            Use your freedom to serve. Volunteer, mentor someone, use your skills for others. 
+                            Your singleness gives you availability that's a gift to the world.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Retreat Time</div>
+                        <div class="resource-content">
+                            Take a personal retreat. Even if just for a few hours. Get alone with God. 
+                            Journal. Process. Listen. Your relationship with God is your primary relationship.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Rhythms for Difficult Days</h2>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">When Loneliness Hits</div>
+                        <div class="resource-content">
+                            1. Acknowledge the feeling without judgment<br>
+                            2. Reach out to someone (text, call, or visit)<br>
+                            3. Do something kind for another person<br>
+                            4. Move your body (walk, dance, exercise)<br>
+                            5. Remember: Loneliness is a feeling, not a fact
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">When Sexual Temptation Peaks</div>
+                        <div class="resource-content">
+                            1. HALT check: Am I Hungry, Angry, Lonely, or Tired?<br>
+                            2. Change your physical environment immediately<br>
+                            3. Call/text an accountability friend<br>
+                            4. Engage in vigorous physical activity<br>
+                            5. Pray honestly about what you're feeling<br>
+                            6. Remember your "why" for choosing purity
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEXUAL WHOLENESS SCREEN -->
+        <div id="sexualWholeness" class="screen">
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <button class="back-btn" onclick="app.showScreen('homeScreen')">←</button>
+                        <div class="header-title">
+                            <h1>Sexual Wholeness</h1>
+                            <div class="header-subtitle">Navigating desire with wisdom</div>
+                        </div>
+                    </div>
+                    <button class="audio-toggle" onclick="app.toggleAudio()">🔇</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="scripture-card">
+                    <div class="scripture-text">
+                        "Flee from sexual immorality... honor God with your bodies."
+                    </div>
+                    <div class="scripture-ref">1 Corinthians 6:18,20</div>
+                </div>
+
+                <div class="card">
+                    <h2>The Truth About Sexual Desire</h2>
+                    <p>
+                        Your sexual desire is not a curse, a mistake, or a punishment for being single. 
+                        It's evidence that you're created in God's image—made for intimacy, connection, and pleasure. 
+                        The challenge isn't to eliminate desire but to steward it wisely.
+                    </p>
+                    
+                    <h3>What Scripture Actually Says</h3>
+                    <ul style="line-height: 1.8;">
+                        <li>Sexual desire itself is not sin—it's part of being human</li>
+                        <li>God created sex and called it "very good" (Genesis 1:31)</li>
+                        <li>The Song of Solomon celebrates sexual desire and pleasure</li>
+                        <li>Jesus was fully human, meaning he experienced all human desires</li>
+                        <li>Paul acknowledges the strength of sexual desire (1 Cor 7:9)</li>
+                    </ul>
+                    
+                    <h3>What This Means for You</h3>
+                    <p style="margin-top: 15px;">
+                        Stop shaming yourself for having desires. Instead, learn to acknowledge them, 
+                        talk to God about them, and channel them in life-giving ways. Your sexuality 
+                        is part of your humanity, not something to be suppressed until marriage.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2>Practical Strategies for Sexual Integrity</h2>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">1. Understand Your Triggers</div>
+                        <div class="resource-content">
+                            What situations, times, or emotional states make you most vulnerable? 
+                            Late nights? After conflict? When you're lonely? Stressed? Bored? 
+                            Know your patterns and plan accordingly. This isn't about perfection; 
+                            it's about wisdom.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">2. Channel Sexual Energy</div>
+                        <div class="resource-content">
+                            Sexual energy is life energy. When it rises, channel it:
+                            <ul style="margin-top: 10px;">
+                                <li>• Into creative projects (art, music, writing)</li>
+                                <li>• Into physical activity (running, dancing, sports)</li>
+                                <li>• Into service and connection with others</li>
+                                <li>• Into passionate prayer and worship</li>
+                                <li>• Into learning and intellectual pursuits</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">3. Practice Embodied Spirituality</div>
+                        <div class="resource-content">
+                            Don't try to be a floating head Christian. You have a body. Honor it:
+                            <ul style="margin-top: 10px;">
+                                <li>• Get regular massages for healthy touch</li>
+                                <li>• Exercise to stay connected to your body</li>
+                                <li>• Dance to express yourself physically</li>
+                                <li>• Practice breathing exercises</li>
+                                <li>• Take care of your physical appearance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">4. Build Intimate (Non-Sexual) Relationships</div>
+                        <div class="resource-content">
+                            Intimacy isn't just sexual. Build deep friendships where you're known, 
+                            seen, and loved. Share your struggles. Be vulnerable. Create chosen family. 
+                            Many of your intimacy needs can be met through platonic relationships.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>When You Fail</h2>
+                    <p>
+                        Let's be real: You might fail. You might cross boundaries you set. 
+                        You might fall into pornography, masturbation, or inappropriate relationships. 
+                        What then?
+                    </p>
+                    
+                    <div class="resource-item" style="margin-top: 20px;">
+                        <div class="resource-title">Remember Grace</div>
+                        <div class="resource-content">
+                            "If we confess our sins, he is faithful and just and will forgive us our sins 
+                            and purify us from all unrighteousness" (1 John 1:9). 
+                            Your failure doesn't disqualify you. Get up, receive grace, and keep going.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Learn from It</div>
+                        <div class="resource-content">
+                            What led to the failure? What could you do differently? 
+                            Every failure is data that can lead to future success. 
+                            Don't waste your failures; learn from them.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Get Support</div>
+                        <div class="resource-content">
+                            You cannot do this alone. Find someone safe to be honest with. 
+                            Join a support group. Get counseling if needed. 
+                            Isolation and shame will keep you stuck; community brings freedom.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>A Different Perspective on Waiting</h2>
+                    <p>
+                        What if you're not "waiting" for marriage to experience sexual fulfillment? 
+                        What if you're cultivating sexual wholeness right now? 
+                        What if your journey with your sexuality as a single person is preparing you 
+                        to be a better lover if/when you marry?
+                    </p>
+                    <p style="margin-top: 15px;">
+                        The self-knowledge, self-control, and deep relationship with God you're developing 
+                        will serve you whether you marry or remain single. You're not on hold; 
+                        you're becoming whole.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LONELINESS SUPPORT SCREEN -->
+        <div id="lonelinessSupport" class="screen">
+            <div class="header">
+                <div class="header-content">
+                    <div class="header-left">
+                        <button class="back-btn" onclick="app.showScreen('homeScreen')">←</button>
+                        <div class="header-title">
+                            <h1>Loneliness & Connection</h1>
+                            <div class="header-subtitle">Building meaningful relationships</div>
+                        </div>
+                    </div>
+                    <button class="audio-toggle" onclick="app.toggleAudio()">🔇</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="card">
+                    <h2>The Truth About Loneliness</h2>
+                    <p>
+                        First, let's be clear: Loneliness is not unique to singles. 
+                        Many married people are desperately lonely. 
+                        Marriage doesn't cure loneliness; connection does. 
+                        And connection is available to you right now, as a single person.
+                    </p>
+                    
+                    <h3>Types of Loneliness</h3>
+                    <div class="resource-item">
+                        <div class="resource-title">Emotional Loneliness</div>
+                        <div class="resource-content">
+                            The absence of someone who "gets" you. Combat this by deepening existing friendships, 
+                            joining groups with shared interests, being vulnerable with safe people.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Social Loneliness</div>
+                        <div class="resource-content">
+                            Lack of a social network. Address this by joining clubs, attending church events, 
+                            volunteering, saying yes to invitations even when you don't feel like it.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Spiritual Loneliness</div>
+                        <div class="resource-content">
+                            Feeling disconnected from God. Remedy through prayer, meditation, worship, 
+                            spiritual direction, and remembering that feelings aren't facts.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Physical Loneliness</div>
+                        <div class="resource-content">
+                            Lack of physical touch and presence. Address through hugs, massage, 
+                            pets, exercise classes, dance, and being around people even without interaction.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Building Your Chosen Family</h2>
+                    <p>
+                        As a single person, you have the opportunity to build a chosen family—
+                        deep, committed friendships that provide mutual support, celebration, and belonging.
+                    </p>
+                    
+                    <h3>How to Build Deep Friendships</h3>
+                    <ul style="line-height: 1.8;">
+                        <li><strong>Be Intentional:</strong> Don't wait for friendships to "happen." Pursue people.</li>
+                        <li><strong>Be Consistent:</strong> Regular contact builds connection. Schedule recurring time.</li>
+                        <li><strong>Be Vulnerable:</strong> Share your real self, not just your highlight reel.</li>
+                        <li><strong>Be Committed:</strong> Treat friendships with the commitment usually reserved for romance.</li>
+                        <li><strong>Be Present:</strong> Put away your phone. Listen deeply. Show up fully.</li>
+                        <li><strong>Be Generous:</strong> Give without keeping score. Celebrate others' wins.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>Creating Connection Opportunities</h2>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Host Regular Gatherings</div>
+                        <div class="resource-content">
+                            Weekly dinner, monthly game night, quarterly parties. 
+                            Be the person who brings people together. 
+                            Your home doesn't have to be perfect; it just has to be open.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Join or Start a Group</div>
+                        <div class="resource-content">
+                            Book club, hiking group, cooking class, Bible study, volunteer team. 
+                            Shared activities create natural connection points. 
+                            If nothing exists, start something.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Practice Micro-Connections</div>
+                        <div class="resource-content">
+                            Chat with the barista, smile at strangers, compliment someone, 
+                            help a neighbor. Small connections throughout the day combat isolation.
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-title">Embrace Intergenerational Friendships</div>
+                        <div class="resource-content">
+                            Don't limit yourself to people your age. Mentor younger people, 
+                            learn from older people. Some of the richest friendships cross generational lines.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>When Loneliness Feels Unbearable</h2>
+                    
+                    <div class="scripture-card">
+                        <div class="scripture-text">
+                            "God sets the lonely in families, he leads out the prisoners with singing."
+                        </div>
+                        <div class="scripture-ref">Psalm 68:6</div>
+                    </div>
+                    
+                    <h3>Emergency Loneliness Plan</h3>
+                    <ol style="line-height: 1.8; margin-left: 20px;">
+                        <li>Acknowledge the feeling without shame</li>
+                        <li>Remember that loneliness is temporary, even when it doesn't feel like it</li>
+                        <li>Reach out to someone—anyone. Send a text, make a call</li>
+                        <li>Get out of your house. Go to a coffee shop, library, gym</li>
+                        <li>Do something for someone else. Service breaks the spiral</li>
+                        <li>Talk to God honestly about how you're feeling</li>
+                        <li>Remember: You are not alone, even when you feel alone</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h2>The Gift of Solitude</h2>
+                    <p>
+                        There's a difference between loneliness and solitude. 
+                        Loneliness is the pain of being alone. 
+                        Solitude is the glory of being alone. 
+                        As a single person, you have the opportunity to cultivate solitude—
+                        to enjoy your own company, to know yourself deeply, to commune with God without distraction.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Learn to be alone without being lonely. This is a superpower that will serve you 
+                        whether you remain single or marry. The person who can be happily alone 
+                        is never truly lonely.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFO MODAL -->
+        <div id="infoModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="app.closeModal('infoModal')">×</button>
+                <h2>About This App</h2>
+                
+                <h3>What This App Provides</h3>
+                <p>
+                    A comprehensive support system for Christian singles navigating the challenges of singleness, 
+                    sexual desire, loneliness, and finding purpose in their season. 
+                    This is a shame-free, grace-filled space that acknowledges real struggles 
+                    while pointing to biblical truth and practical wisdom.
+                </p>
+                
+                <h3>Features</h3>
+                <ul style="line-height: 1.8;">
+                    <li>Daily encouragement specifically for singles</li>
+                    <li>Honest devotionals about desire and longing</li>
+                    <li>Community testimonies from thriving singles</li>
+                    <li>Practical "holy rhythms" for daily life</li>
+                    <li>Biblical perspective on sexual wholeness</li>
+                    <li>Strategies for building connection</li>
+                    <li>Private journaling space</li>
+                    <li>Mood tracking and self-reflection</li>
+                </ul>
+                
+                <h3>Privacy & Security</h3>
+                <p>
+                    All data is stored locally on your device. Nothing is uploaded to servers. 
+                    Your thoughts, struggles, and journey remain completely private.
+                </p>
+                
+                <h3>Remember</h3>
+                <p>
+                    You are whole, not half. Your life has meaning and purpose right now. 
+                    Your singleness is not a problem to be solved but a season to be stewarded. 
+                    You are deeply loved by God exactly as you are.
+                </p>
+                
+                <h3>Install on Phone</h3>
+                <p><strong>iPhone:</strong> Share → Add to Home Screen</p>
+                <p><strong>Android:</strong> Menu → Add to Home Screen</p>
+                
+                <button class="btn btn-primary btn-full" onclick="app.closeModal('infoModal')">Close</button>
+            </div>
+        </div>
+
+        <!-- ABOUT MODAL -->
+        <div id="aboutModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="app.closeModal('aboutModal')">×</button>
+                <h2>Depths to Heights Ministry</h2>
+                
+                <p><strong>Made by Justin</strong></p>
+                <p>
+                    Created for singles who are tired of being told to "just wait" 
+                    and want to live fully in their current season.
+                </p>
+                
+                <h3>Our Mission</h3>
+                <p>
+                    To provide honest, biblical, practical support for Christian singles 
+                    navigating sexuality, loneliness, and purpose. We believe the church 
+                    needs to have better conversations about singleness—conversations that 
+                    acknowledge real struggles while celebrating the unique gifts of this season.
+                </p>
+                
+                <h3>Core Beliefs</h3>
+                <ul style="line-height: 1.8;">
+                    <li>Singleness is not a curse or a waiting room</li>
+                    <li>Sexual desire is human, not shameful</li>
+                    <li>Wholeness comes from Christ, not marriage</li>
+                    <li>Singles have unique gifts to offer the Kingdom</li>
+                    <li>Community and connection are available now</li>
+                    <li>Your life has purpose and meaning today</li>
+                </ul>
+                
+                <p><strong>Website:</strong> <a href="https://depthstoheights.org" target="_blank">depthstoheights.org</a></p>
+                <p><strong>Email:</strong> <a href="mailto:depthstoheights@gmail.com">depthstoheights@gmail.com</a></p>
+                
+                <button class="btn btn-courage btn-full" onclick="window.open('https://www.paypal.com/donate/?hosted_button_id=8GRE7B8C3TP2U', '_blank')">Support This Ministry</button>
+                
+                <p style="margin-top: 20px; font-style: italic; text-align: center; color: #666;">
+                    "Delight yourself in the Lord, and he will give you the desires of your heart." - Psalm 37:4
+                </p>
+            </div>
+        </div>
+
+        <!-- JOURNAL MODAL -->
+        <div id="journalModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="app.closeModal('journalModal')">×</button>
+                <h2>Private Reflection</h2>
+                
+                <h3>What's on your heart?</h3>
+                <textarea class="journal-textarea" id="journalEntry" placeholder="Be honest with yourself and God. This is just between you and Him..." style="min-height: 200px;"></textarea>
+                
+                <h3>What are you grateful for in your singleness?</h3>
+                <textarea class="journal-textarea" id="gratitudeEntry" placeholder="Even small things count..."></textarea>
+                
+                <h3>What do you need from God today?</h3>
+                <textarea class="journal-textarea" id="needEntry" placeholder="Ask honestly..."></textarea>
+                
+                <button class="btn btn-primary btn-full" onclick="app.saveJournal()">Save Entry</button>
+                <div id="journalMessage"></div>
+            </div>
+        </div>
+
+        <!-- BOTTOM NAVIGATION -->
+        <div class="bottom-nav">
+            <button class="nav-item active" onclick="app.navigate('homeScreen')">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Home</span>
+            </button>
+            <button class="nav-item" onclick="app.navigate('dailyEncouragement')">
+                <span class="nav-icon">☀️</span>
+                <span class="nav-text">Daily</span>
+            </button>
+            <button class="nav-item" onclick="app.openModal('journalModal')">
+                <span class="nav-icon">📝</span>
+                <span class="nav-text">Journal</span>
+            </button>
+            <button class="nav-item" onclick="app.openModal('infoModal')">
+                <span class="nav-icon">ℹ️</span>
+                <span class="nav-text">Info</span>
+            </button>
+            <button class="nav-item" onclick="app.openModal('aboutModal')">
+                <span class="nav-icon">💜</span>
+                <span class="nav-text">About</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const app = {
+            audioPlaying: false,
+            currentMood: null,
+            checkIns: JSON.parse(localStorage.getItem('singleCheckIns') || '[]'),
+            journalEntries: JSON.parse(localStorage.getItem('singleJournal') || '[]'),
+            
+            encouragements: [
+                {
+                    title: "You Are Complete",
+                    content: `Today, remember that you are a whole person. Not half of a couple, not incomplete, not waiting to begin. You are fully human, fully loved, fully valuable right now. Your singleness doesn't diminish you; it's simply your current relationship status. It doesn't define your worth, your purpose, or your capacity for love and joy.`
+                },
+                {
+                    title: "Your Desires Are Not Shameful", 
+                    content: `God created you as a sexual being. Your longings for intimacy, touch, and connection are not sins to be suppressed but aspects of your humanity to be stewarded. Today, instead of shame, practice gratitude for your capacity to desire. Ask God for wisdom in channeling these powerful energies toward life-giving purposes.`
+                },
+                {
+                    title: "Purpose in This Season",
+                    content: `Your singleness is not a cosmic accident or divine punishment. There are things you can do, places you can go, people you can serve precisely because you are single right now. Today, ask God to show you the unique opportunities this season provides. Your availability is a gift to the Kingdom.`
+                },
+                {
+                    title: "Intimacy Beyond Romance",
+                    content: `Intimacy is not exclusive to romantic relationships. Today, pursue deep connection with friends, family, and God. Share something vulnerable. Ask meaningful questions. Listen deeply. Touch appropriately through hugs and presence. You can experience profound intimacy as a single person.`
+                },
+                {
+                    title: "Strength in Solitude",
+                    content: `There's power in being comfortable alone. Not lonely, but alone. Today, practice solitude as a spiritual discipline. Enjoy your own company. Listen to your thoughts. Meet God in the quiet. The person who can be happily alone is never desperately lonely.`
+                },
+                {
+                    title: "Freedom to Choose",
+                    content: `You have extraordinary freedom right now. Freedom to move, to serve, to risk, to explore. This isn't consolation for not being married; it's a genuine gift. Today, do something you can only do because you're single. Celebrate the flexibility and opportunity your status provides.`
+                },
+                {
+                    title: "God's Timing",
+                    content: `God's timing rarely matches our expectations, but it's always perfect. Your singleness right now is not a delay in God's plan; it IS God's plan for this moment. Trust that He knows what He's doing, even when you don't understand. He's writing a story bigger than you can see.`
+                }
+            ],
+            
+            verses: [
+                { text: "The Lord is close to the brokenhearted and saves those who are crushed in spirit.", ref: "Psalm 34:18" },
+                { text: "Delight yourself in the Lord, and he will give you the desires of your heart.", ref: "Psalm 37:4" },
+                { text: "Trust in the Lord with all your heart and lean not on your own understanding.", ref: "Proverbs 3:5" },
+                { text: "I have learned to be content whatever the circumstances.", ref: "Philippians 4:11" },
+                { text: "Cast all your anxiety on him because he cares for you.", ref: "1 Peter 5:7" },
+                { text: "For I know the plans I have for you, declares the Lord, plans to prosper you.", ref: "Jeremiah 29:11" },
+                { text: "My grace is sufficient for you, for my power is made perfect in weakness.", ref: "2 Corinthians 12:9" }
+            ],
+            
+            init() {
+                this.loadDailyContent();
+                this.loadCheckInHistory();
+            },
+            
+            toggleAudio() {
+                const audio = document.getElementById('bgMusic');
+                const buttons = document.querySelectorAll('.audio-toggle');
+                
+                if (this.audioPlaying) {
+                    audio.pause();
+                    buttons.forEach(btn => btn.textContent = '🔇');
+                } else {
+                    audio.play().catch(e => console.log('Audio prevented'));
+                    buttons.forEach(btn => btn.textContent = '🔊');
+                }
+                this.audioPlaying = !this.audioPlaying;
+            },
+            
+            showScreen(screenId) {
+                document.querySelectorAll('.screen').forEach(screen => {
+                    screen.classList.remove('active');
+                });
+                document.getElementById(screenId).classList.add('active');
+                window.scrollTo(0, 0);
+                this.updateNavigation(screenId);
+            },
+            
+            navigate(screenId) {
+                this.showScreen(screenId);
+            },
+            
+            updateNavigation(screenId) {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                const navMap = {
+                    'homeScreen': 0,
+                    'dailyEncouragement': 1
+                };
+                
+                if (navMap[screenId] !== undefined) {
+                    document.querySelectorAll('.nav-item')[navMap[screenId]].classList.add('active');
+                }
+            },
+            
+            openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            },
+            
+            closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            },
+            
+            loadDailyContent() {
+                const today = new Date().getDay();
+                const verse = this.verses[today];
+                const encouragement = this.encouragements[today];
+                
+                const verseElement = document.getElementById('dailyVerse');
+                const refElement = document.getElementById('dailyRef');
+                const titleElement = document.getElementById('encouragementTitle');
+                const contentElement = document.getElementById('encouragementContent');
+                
+                if (verseElement) verseElement.textContent = verse.text;
+                if (refElement) refElement.textContent = verse.ref;
+                if (titleElement) titleElement.textContent = encouragement.title;
+                if (contentElement) contentElement.innerHTML = `<p>${encouragement.content}</p>`;
+            },
+            
+            selectMood(element, mood) {
+                document.querySelectorAll('.checkin-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                element.classList.add('selected');
+                this.currentMood = mood;
+            },
+            
+            saveCheckIn() {
+                if (!this.currentMood) {
+                    this.showMessage('', 'Please select how you\'re feeling', 'info');
+                    return;
+                }
+                
+                const checkIn = {
+                    date: new Date().toISOString(),
+                    mood: this.currentMood
+                };
+                
+                this.checkIns.unshift(checkIn);
+                if (this.checkIns.length > 30) this.checkIns.pop();
+                
+                localStorage.setItem('singleCheckIns', JSON.stringify(this.checkIns));
+                this.showMessage('', 'Check-in saved. God sees you and loves you.', 'success');
+                
+                // Provide mood-specific encouragement
+                this.showMoodEncouragement(this.currentMood);
+            },
+            
+            showMoodEncouragement(mood) {
+                const encouragements = {
+                    content: "Beautiful! Contentment is a gift. Celebrate this peace.",
+                    lonely: "Loneliness is real and valid. Reach out to someone today.",
+                    struggling: "It's okay to struggle. God is especially close to you right now.",
+                    hopeful: "Hope is powerful. Hold onto it and let it guide you forward.",
+                    frustrated: "Frustration means you care. Channel it into positive action.",
+                    peaceful: "Peace is precious. Rest in it and share it with others."
+                };
+                
+                setTimeout(() => {
+                    this.showMessage('', encouragements[mood], 'info');
+                }, 2000);
+            },
+            
+            loadCheckInHistory() {
+                // This could display check-in history if needed
+            },
+            
+            saveJournal() {
+                const entry = {
+                    date: new Date().toISOString(),
+                    content: document.getElementById('journalEntry').value,
+                    gratitude: document.getElementById('gratitudeEntry').value,
+                    need: document.getElementById('needEntry').value
+                };
+                
+                if (!entry.content && !entry.gratitude && !entry.need) {
+                    this.showMessage('journalMessage', 'Please write something before saving', 'info');
+                    return;
+                }
+                
+                this.journalEntries.unshift(entry);
+                localStorage.setItem('singleJournal', JSON.stringify(this.journalEntries));
+                
+                // Clear form
+                document.getElementById('journalEntry').value = '';
+                document.getElementById('gratitudeEntry').value = '';
+                document.getElementById('needEntry').value = '';
+                
+                this.showMessage('journalMessage', '✓ Entry saved privately', 'success');
+                
+                setTimeout(() => {
+                    this.closeModal('journalModal');
+                }, 2000);
+            },
+            
+            shareStory() {
+                const message = `Your story matters! Consider sharing how God has worked in your singleness. 
+                Your testimony could be the encouragement another single needs to keep going. 
+                Email your story to depthstoheights@gmail.com`;
+                this.showMessage('', message, 'info');
+            },
+            
+            showMessage(elementId, message, type) {
+                if (elementId) {
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.innerHTML = `<div class="message message-${type}">${message}</div>`;
+                        setTimeout(() => {
+                            element.innerHTML = '';
+                        }, 5000);
+                    }
+                } else {
+                    // Create temporary toast message
+                    const toast = document.createElement('div');
+                    toast.className = `message message-${type}`;
+                    toast.textContent = message;
+                    toast.style.position = 'fixed';
+                    toast.style.top = '100px';
+                    toast.style.left = '50%';
+                    toast.style.transform = 'translateX(-50%)';
+                    toast.style.zIndex = '3000';
+                    toast.style.maxWidth = '90%';
+                    toast.style.width = '400px';
+                    document.body.appendChild(toast);
+                    
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 5000);
+                }
+            }
+        };
+        
+        // Initialize app on load
+        document.addEventListener('DOMContentLoaded', () => app.init());
+    </script>
+</body>
+</html>
